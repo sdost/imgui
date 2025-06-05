@@ -10053,16 +10053,6 @@ bool ImGui::IsMouseReleasedWithDelay(ImGuiMouseButton button, float delay)
     return !IsMouseDown(button) && (time_since_release - g.IO.DeltaTime < delay) && (time_since_release >= delay);
 }
 
-// Use if you absolutely need to distinguish single-click from double-click by introducing a delay.
-// Generally use with 'delay >= io.MouseDoubleClickTime' + combined with a 'io.MouseClickedLastCount == 1' test.
-// This is a very rarely used UI idiom, but some apps use this: e.g. MS Explorer single click on an icon to rename.
-bool ImGui::IsMouseReleasedWithDelay(ImGuiMouseButton button, float delay)
-{
-    ImGuiContext& g = *GImGui;
-    IM_ASSERT(button >= 0 && button < IM_ARRAYSIZE(g.IO.MouseDown));
-    return g.IO.MouseClickedCount[button] == 2 && TestKeyOwner(MouseButtonToKey(button), ImGuiKeyOwner_Any);
-}
-
 bool ImGui::IsMouseDoubleClicked(ImGuiMouseButton button, ImGuiID owner_id)
 {
   ImGuiContext &g = *GImGui;
