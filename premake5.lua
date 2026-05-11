@@ -30,9 +30,15 @@ pic "On"
 systemversion "latest"
 cppdialect "C++17"
 
+-- SDE-8: vendor code stays optimized in Debug. Symbols stay on so engine
+-- callstacks resolve cleanly when stepping through Seidr code that calls into
+-- ImGui; we just don't want bounds-checked containers and zero inlining in
+-- the per-frame ImGui path.
 filter "configurations:Debug"
 runtime "Debug"
 symbols "on"
+optimize "speed"
+flags { "NoRuntimeChecks" }  -- /RTC1 conflicts with /O2; SDE-8 prioritizes speed
 
 filter "configurations:Release"
 runtime "Release"
