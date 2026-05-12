@@ -38,7 +38,7 @@ filter "configurations:Debug"
 runtime "Debug"
 symbols "on"
 optimize "speed"
-flags { "NoRuntimeChecks" }  -- /RTC1 conflicts with /O2; SDE-8 prioritizes speed
+runtimechecks "Off"  -- /RTC1 conflicts with /O2; SDE-8 prioritizes speed
 
 filter "configurations:Release"
 runtime "Release"
